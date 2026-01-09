@@ -16,17 +16,16 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     htop
 
-RUN pip3 install --upgrade pip \ 
-    && pip3 install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121 \
-    && pip3 install matplotlib \
-    && pip3 install Pillow \
-    && pip3 install tqdm \
-    && pip3 install einops \
-    && pip3 install PyYAML \
-    && pip3 install tensorboardX \ 
-    && pip3 install opencv-python \ 
-    && pip3 install scipy \ 
-    && pip3 install "numpy<2.0"
+RUN pip3 install --no-cache-dir --upgrade pip
+RUN pip3 install --no-cache-dir torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+# 개별 설치로 변경 (메모리 확보 및 오류 추적 용이)
+RUN pip3 install --no-cache-dir matplotlib Pillow tqdm einops PyYAML
+RUN pip3 install --no-cache-dir tensorboardX scipy
+RUN pip3 install --no-cache-dir "numpy<2.0"
+
+# OpenCV 설치 (앞서 말씀드린 의존성 패키지 추가)
+RUN apt-get update && apt-get install -y libglib2.0-0
+RUN pip3 install --no-cache-dir opencv-python
 
 # 개발용 디렉토리
 RUN mkdir -p /home/dev
