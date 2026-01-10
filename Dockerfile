@@ -14,7 +14,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     openssh-server \ 
     vim \ 
     git \
-    htop
+    htop \
+    unzip
+    
 
 RUN pip3 install --no-cache-dir --upgrade pip
 RUN pip3 install --no-cache-dir torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu126
