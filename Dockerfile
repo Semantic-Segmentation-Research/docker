@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     htop
 
 RUN pip3 install --no-cache-dir --upgrade pip
-RUN pip3 install --no-cache-dir torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+RUN pip3 install --no-cache-dir torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu126
 # 개별 설치로 변경 (메모리 확보 및 오류 추적 용이)
 RUN pip3 install --no-cache-dir matplotlib Pillow tqdm einops PyYAML
 RUN pip3 install --no-cache-dir tensorboardX scipy
