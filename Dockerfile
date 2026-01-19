@@ -23,6 +23,7 @@ RUN pip3 install --no-cache-dir torch==2.9.0 torchvision==0.24.0 torchaudio==2.9
 RUN pip3 install --no-cache-dir tensorboard
 RUN pip3 install --no-cache-dir torchmetrics
 RUN pip3 install --no-cache-dir kornia
+RUN pip3 install --no-cache-dir gdown
 
 RUN pip3 install --no-cache-dir matplotlib Pillow tqdm einops PyYAML cityscapesscripts
 RUN pip3 install --no-cache-dir scipy
