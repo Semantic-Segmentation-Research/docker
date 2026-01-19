@@ -10,9 +10,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    libgl1-mesa-glx \ 
-    openssh-server \ 
-    vim \ 
+    libgl1-mesa-glx \
+    openssh-server \
+    vim \
     git \
     htop \
     unzip
