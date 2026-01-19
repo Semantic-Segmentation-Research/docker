@@ -1,21 +1,22 @@
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     wget \
     python3-pip \
+    unzip \
+    vim \
+    htop \
+    openssh-server \
+    libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
     libgl1-mesa-glx \
-    openssh-server \
-    vim \
-    git \
-    htop \
-    unzip
+    && rm -rf /var/lib/apt/lists/*
     
 
 RUN pip3 install --no-cache-dir --upgrade pip
