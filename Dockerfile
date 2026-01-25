@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y libglib2.0-0
 RUN pip3 install --no-cache-dir opencv-python
 RUN pip3 install --no-cache-dir "numpy<2.0"
 RUN pip3 install --no-cache-dir albumentations
+RUN pip3 install --no-cache-dir pandas seaborn
 
 RUN mkdir -p /home/dev
 WORKDIR /home/dev
