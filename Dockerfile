@@ -1,47 +1,60 @@
-FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.6.3-cudnn9-devel-ubuntu22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     wget \
-    python3-pip \
+    curl \
     unzip \
     vim \
     htop \
     openssh-server \
+    python3-pip \
+    python3-dev \
+    python3-venv \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
     libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
-    
 
-RUN pip3 install --no-cache-dir --upgrade pip
-RUN pip3 install --no-cache-dir torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu126
-RUN pip3 install --no-cache-dir tensorboard
-RUN pip3 install --no-cache-dir torchmetrics
-RUN pip3 install --no-cache-dir kornia
-RUN pip3 install --no-cache-dir gdown
-RUN pip3 install --no-cache-dir sconf
-RUN pip3 install --no-cache-dir omegaconf
-RUN pip3 install --no-cache-dir lmdb
-RUN pip3 install --no-cache-dir scikit-image
-RUN pip3 install --no-cache-dir lpips
-RUN pip3 install --no-cache-dir pytorch-lightning==1.9.0
+RUN python3 -m pip install --upgrade pip setuptools wheel
 
-RUN pip3 install --no-cache-dir matplotlib Pillow tqdm einops PyYAML cityscapesscripts
-RUN pip3 install --no-cache-dir scipy
+RUN python3 -m pip install --no-cache-dir \
+    torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 \
+    --index-url https://download.pytorch.org/whl/cu126
 
-RUN apt-get update && apt-get install -y libglib2.0-0
-RUN pip3 install --no-cache-dir opencv-python
-RUN pip3 install --no-cache-dir "numpy<2.0"
-RUN pip3 install --no-cache-dir albumentations
-RUN pip3 install --no-cache-dir pandas seaborn
+RUN python3 -m pip install --no-cache-dir \
+    tensorboard \
+    torchmetrics \
+    kornia \
+    timm \
+    gdown \
+    sconf \
+    omegaconf \
+    lmdb \
+    scikit-image \
+    lpips \
+    pytorch-lightning==1.9.0 \
+    matplotlib \
+    Pillow \
+    tqdm \
+    einops \
+    PyYAML \
+    cityscapesscripts \
+    scipy \
+    opencv-python \
+    "numpy<2.0" \
+    albumentations \
+    pandas \
+    seaborn
 
-RUN mkdir -p /home/dev
 WORKDIR /home/dev
 
 CMD ["/bin/bash"]
