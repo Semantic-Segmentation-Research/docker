@@ -31,18 +31,18 @@ apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    libgl1-mesa-glx \
+    libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # 3. Pip 및 빌드 툴 업데이트
 echo "--> Upgrading pip, setuptools, and wheel..."
 python3 -m pip install --upgrade pip setuptools wheel
 
-# 4. PyTorch 및 CUDA 12.6 관련 라이브러리 설치
-echo "--> Installing PyTorch 2.9.0 with CUDA 12.6..."
+# 4. PyTorch 및 CUDA 12.8 관련 라이브러리 설치
+echo "--> Installing PyTorch with CUDA 12.8 for RTX 5090..."
 python3 -m pip install --no-cache-dir \
-    torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 \
-    --index-url https://download.pytorch.org/whl/cu126
+    torch torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128
 
 # 5. 기타 딥러닝 및 이미지 처리 종속성 패키지 설치
 echo "--> Installing deep learning & image processing packages..."
@@ -57,7 +57,7 @@ python3 -m pip install --no-cache-dir \
     lmdb \
     scikit-image \
     lpips \
-    pytorch-lightning==1.9.0 \
+    pytorch-lightning \
     matplotlib \
     Pillow \
     tqdm \
